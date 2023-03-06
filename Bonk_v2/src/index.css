@@ -1,0 +1,13 @@
+:root {
+  font-family: "Orbitron", Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body{
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  background-color: rgb(32, 34, 37);
+}
+

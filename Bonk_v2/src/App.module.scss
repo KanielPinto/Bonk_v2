@@ -1,0 +1,58 @@
+@mixin invisibleInput{
+    border: 0px;
+    clip: rect(0px,0px,0px,0px);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+}
+
+.header{
+    font-family: Orbitron;
+}
+
+.row{
+    display: flex;
+    column-gap: 9px;
+
+    & > *:nth-child(4n):not(:last-child){
+        margin-right: 9px ;
+    }
+}
+
+.cellStrip{
+    display: flex;
+    flex-direction: column;
+    row-gap: 9px;
+}
+
+
+.cell{
+    $cell: &;
+    cursor: pointer;
+
+    &Input{
+        @include invisibleInput();
+
+        &:checked   +   #{$cell}Content{
+            background-color: #38fbdb;
+        }
+    }
+
+    &Content{
+        width: 30px;
+        height: 40px;
+        background-color: #ccc;
+        border-radius: 5px;
+    }
+}
+
+
+.header{
+    font-size: 48px;
+    color: aliceblue;
+    text-align: center;
+}

@@ -10,6 +10,11 @@
     position: absolute;
 }
 
+
+.container{
+    display: grid;
+    row-gap: 20px;
+}
 .header{
     font-family: Orbitron;
 }
@@ -40,6 +45,11 @@
         &:checked   +   #{$cell}Content{
             background-color: #38fbdb;
         }
+
+        &:focus-visible + #{$cell}Content{
+            outline: solid 3px #ff00cc;
+            outline-offset: 3px;
+        }
     }
 
     &Content{
@@ -47,7 +57,11 @@
         height: 40px;
         background-color: #ccc;
         border-radius: 5px;
+
+        
     }
+
+    
 }
 
 
@@ -55,4 +69,36 @@
     font-size: 48px;
     color: aliceblue;
     text-align: center;
+}
+
+.controlPanel{
+    display: flex;
+    column-gap: 20px;
+    
+}
+
+.playButton{
+    border: none;
+    border-radius: 5px;
+    appearance: none;
+    background-color: darkblue;
+    color: white;
+    width: 80px;
+    line-height: 2;
+    font-weight: 700;
+    transition: background-color 0.5s;
+
+
+    &:hover{
+        background-color: blue;
+    }
+}
+
+.controlCol{
+    text-align: center;
+    color: azure;
+    font-weight: 700;
+}
+.slider{
+    caption-side: top;
 }

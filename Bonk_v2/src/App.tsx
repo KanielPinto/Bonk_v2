@@ -45,6 +45,13 @@ export default function App({ samples, noOfSteps }: Props) {
           <label htmlFor="bpmSlide">BPM</label> <br />
           <input type="range" className={styles.slider} name="bpmSlide" id="bpmSlide"/>
         </div>
+        <div className={styles.controlCol}>
+          <label htmlFor="presetSel">PRESET</label> <br />
+          <select className={styles.dropbox} name="presetSel" id="presetSel">
+            <option value="base">Base</option>
+            <option value="trap">Trap</option>
+          </select>
+        </div>
       </div>
     </div>
   );

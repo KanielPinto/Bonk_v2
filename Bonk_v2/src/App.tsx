@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./App.module.scss";
 import * as Tone from "tone";
 
-const note = "C2";
+const note = "C1";
 
 type Props = {
   samples: { samp_url: string; samp_name: string }[];
@@ -16,7 +16,7 @@ type Tracks = {
 
 export default function App({ samples, noOfSteps }: Props) {
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const trackId = [...Array(samples.length).keys()] as const;
+  const trackId = [...Array((samples.length/2)).keys()] as const;
   const stepId = [...Array(noOfSteps).keys()] as const;
 
   const trackRef = React.useRef<Tracks[]>([]);
@@ -39,9 +39,15 @@ export default function App({ samples, noOfSteps }: Props) {
     Tone.Transport.bpm.value = Number(val.target.value);
   };
 
+  
+  const presetChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
+    if(e.target.value == "set2"){
+    }
+  };
+
   React.useEffect(() => {
     trackRef.current = samples.map((sample, i) => ({
-      id: i,
+      id: i, //figure out how to change this value
       sampler: new Tone.Sampler({
         urls: {
           [note]: sample.samp_url,
@@ -68,6 +74,8 @@ export default function App({ samples, noOfSteps }: Props) {
       trackRef.current.forEach((track) => track.sampler.dispose());
     };
   }, [samples, noOfSteps]);
+
+
 
   return (
     <div className={styles.container}>
@@ -138,7 +146,13 @@ export default function App({ samples, noOfSteps }: Props) {
             id="bpmSlide"
           />
         </div>
-        
+        <div className={styles.controlCol}>
+          <label htmlFor="presetSel">PRESET</label> <br />
+          <select className={styles.dropbox} name="presetSel" required id="presetSel" defaultValue={"base"} onChange={presetChange}>
+            <option value="base">Base</option>
+            <option value="set2">Set 2</option>
+          </select>
+        </div>
       </div>
     </div>
   );

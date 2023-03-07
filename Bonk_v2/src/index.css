@@ -1,5 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: "Orbitron", Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 }
@@ -8,6 +14,33 @@ body{
   display: grid;
   place-content: center;
   min-height: 100vh;
-  background-color: rgb(32, 34, 37);
+  background-color: rgb(10, 10, 10);
 }
 
+.bg-blue-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #46d1d6 51.94%,
+    #26bad1 90.29%
+  );
+}
+
+.icon-green:hover {
+  filter: drop-shadow(0px 0px 10px rgba(9, 255, 71, 0.8));
+}
+.icon-blue:hover {
+  filter: drop-shadow(0px 0px 10px rgba(0, 174, 255, 0.8));
+}
+.icon-red:hover {
+  filter: drop-shadow(0px 0px 10px rgba(192, 17, 46, 0.8));
+}
+.icon-amber:hover {
+  filter: drop-shadow(0px 0px 10px rgba(255, 167, 2, 0.8));
+}
+.icon-purple:hover {
+  filter: drop-shadow(0px 0px 10px rgba(111, 0, 255, 0.8));
+}

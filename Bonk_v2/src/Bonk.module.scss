@@ -1,3 +1,8 @@
+@import url(index.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @mixin invisibleInput {
   border: 0px;
   clip: rect(0px, 0px, 0px, 0px);
@@ -47,7 +52,7 @@
     @include invisibleInput();
 
     &:checked + #{$cell}Content {
-      background-color: #38fbdb;
+      background-color: aquamarine;
     }
 
     &:focus-visible + #{$cell}Content {
@@ -98,24 +103,22 @@
 .playButton {
   border: none;
   border-radius: 5px;
-  appearance: none;
-  background-color: darkblue;
+  // appearance: none;
+  background-color: rgba(255,255,255,0);
   color: white;
   width: 80px;
   line-height: 2;
   font-weight: 700;
   transition: background-color 0.5s;
+  justify-items: center;
 
-  &:hover {
-    background-color: blue;
-  }
 }
 
 .controlCol {
   text-align: center;
   color: azure;
-  font-weight: 700;
 }
+
 .slider {
   caption-side: top;
 }

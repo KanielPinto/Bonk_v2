@@ -50,6 +50,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
 
   const bpmSet = (val: React.ChangeEvent<HTMLInputElement>) => {
     Tone.Transport.bpm.value = Number(val.target.value);
+    document.getElementById("bpmDisp")!.innerHTML = ("BPM  :   " + Tone.Transport.bpm.value.toFixed(0).toString()) ;
   };
 
   const volSet = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -208,7 +209,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
         </button>
 
         <div className={styles.controlCol}>
-          <label htmlFor="bpmSlide">
+          <label htmlFor="bpmSlide" className="bpmDisp" id="bpmDisp" >
             {"BPM" + "  :  " + Tone.Transport.bpm.value.toFixed(0)}
           </label>
           <br />

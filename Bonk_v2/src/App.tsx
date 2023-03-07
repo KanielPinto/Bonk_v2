@@ -16,7 +16,7 @@ type Tracks = {
 
 export default function App({ samples, noOfSteps }: Props) {
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const trackId = [...Array((samples.length/2)).keys()] as const;
+  const trackId = [...Array(samples.length / 2).keys()] as const;
   const stepId = [...Array(noOfSteps).keys()] as const;
 
   const trackRef = React.useRef<Tracks[]>([]);
@@ -32,16 +32,25 @@ export default function App({ samples, noOfSteps }: Props) {
       await Tone.start();
       Tone.Transport.start();
       setIsPlaying(true);
+      
     }
+  };
+
+  const stopClick =async () => {
+      Tone.Transport.stop();
+      setIsPlaying(false);
   };
 
   const bpmSet = (val: React.ChangeEvent<HTMLInputElement>) => {
     Tone.Transport.bpm.value = Number(val.target.value);
   };
 
-  
-  const presetChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
-    if(e.target.value == "set2"){
+  const volSet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    Tone.Destination.volume.value = Tone.gainToDb(Number(e.target.value));
+  };
+
+  const presetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value == "set2") {
     }
   };
 
@@ -74,8 +83,6 @@ export default function App({ samples, noOfSteps }: Props) {
       trackRef.current.forEach((track) => track.sampler.dispose());
     };
   }, [samples, noOfSteps]);
-
-
 
   return (
     <div className={styles.container}>
@@ -130,10 +137,13 @@ export default function App({ samples, noOfSteps }: Props) {
         <button className={styles.playButton} onClick={playClick}>
           {isPlaying ? "PAUSE" : "PLAY"}
         </button>
+        <button className={styles.playButton} onClick={stopClick}>
+          STOP
+        </button>
         <div className={styles.controlCol}>
           <label htmlFor="bpmSlide">
             {"BPM" + "  :  " + Tone.Transport.bpm.value.toFixed(0)}
-          </label>{" "}
+          </label>
           <br />
           <input
             type="range"
@@ -148,10 +158,34 @@ export default function App({ samples, noOfSteps }: Props) {
         </div>
         <div className={styles.controlCol}>
           <label htmlFor="presetSel">PRESET</label> <br />
-          <select className={styles.dropbox} name="presetSel" required id="presetSel" defaultValue={"base"} onChange={presetChange}>
+          <select
+            className={styles.dropbox}
+            name="presetSel"
+            required
+            id="presetSel"
+            defaultValue={"base"}
+            onChange={presetChange}
+          >
             <option value="base">Base</option>
             <option value="set2">Set 2</option>
           </select>
+        </div>
+
+        <div className={styles.controlCol}>
+          <label htmlFor="volSlide">
+            Volume
+          </label>
+          <br />
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={1}
+            onChange={volSet}
+            className={styles.slider}
+            name="volSlide"
+            id="volSlide"
+          />
         </div>
       </div>
     </div>

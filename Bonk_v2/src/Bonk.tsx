@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import styles from "./Bonk.module.scss";
 import * as Tone from "tone";
-import useForceUpdate from "use-force-update";
 
 const note = "C1";
 
@@ -25,7 +23,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
   var presetFact = globalThis.presetFactor;
   presetFact = 0;
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const trackId = [...Array(samples.length/3).keys()] as const;
+  const trackId = [...Array(samples.length / 3).keys()] as const;
   const stepId = [...Array(noOfSteps).keys()] as const;
 
   const trackRef = React.useRef<Tracks[]>([]);
@@ -79,8 +77,6 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
         },
       }).toDestination(),
     }));
-
-
   };
 
   //   console.log(window.presetFactor.toString());
@@ -118,7 +114,6 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>Bonk v2</div>
       <div className={styles.grid}>
         <div className={styles.row}>
           {stepId.map((stepId) => (
@@ -148,7 +143,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
                     <input
                       type="checkbox"
                       id={id}
-                      className={styles.cellInput}
+                      className={`peer ${styles.cellInput}`}
                       ref={(element) => {
                         if (!element) return;
                         if (!stepRef.current[trackId]) {
@@ -157,7 +152,21 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
                         stepRef.current[trackId][stepId] = element;
                       }}
                     />
-                    <div className={styles.cellContent}></div>
+                    <div
+                      className={`${
+                        trackId == 0
+                          ? "shadow-cyan-400 shadow-3xl bg-cyan-200/50 peer-checked:bg-cyan-400"
+                          : trackId == 1
+                          ? "shadow-fuchsia-400 shadow-3xl bg-fuchsia peer-checked:bg-fuchsia-400"
+                          : trackId == 2
+                          ? "shadow-orange-500 shadow-3xl bg-orange-200 peer-checked:bg-orange-400"
+                          : trackId == 3
+                          ? "shadow-yellow-500 shadow-3xl bg-yellow-200 peer-checked:bg-yellow-400"
+                          : "shadow-lime-500 shadow-3xl bg-lime-200 peer-checked:bg-lime-400"
+                      } peer-checked:opacity-100 opacity-25 ${
+                        styles.cellContent
+                      }`}
+                    ></div>
                   </label>
                 );
               })}
@@ -165,13 +174,39 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
           ))}
         </div>
       </div>
-      <div className={styles.controlPanel}>
+
+      {/*Control Panel*/}
+      <div className={`w-50 flex flex-row space-x-10 mt-2`}>
         <button className={styles.playButton} onClick={playClick}>
-          {isPlaying ? "PAUSE" : "PLAY"}
+          {isPlaying ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="icon-blue w-10 h-10 inline"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="icon-green w-10 h-10 inline"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
         </button>
-        <button className={styles.playButton} onClick={stopClick}>
-          STOP
-        </button>
+
         <div className={styles.controlCol}>
           <label htmlFor="bpmSlide">
             {"BPM" + "  :  " + Tone.Transport.bpm.value.toFixed(0)}
@@ -183,22 +218,25 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             max={280}
             step={1}
             onChange={bpmSet}
-            className={styles.slider}
+            className={`accent-amber-500 icon-amber h-[2px] ${styles.slider}`}
             name="bpmSlide"
             id="bpmSlide"
           />
         </div>
-        <div className={styles.controlCol}>
-          <label htmlFor="presetSel">PRESET</label> <br />
+
+        <div className={`rounded-lg ${styles.controlCol}`}>
+          <label htmlFor="presetSel">Preset</label> <br />
           <select
-            className={styles.dropbox}
             name="presetSel"
             required
             id="presetSel"
             defaultValue={"base"}
             onChange={presetChange}
+            className="bg-black border-2 rounded-md mt-1 border-white text-center"
           >
-            <option value="base">Base</option>
+            <option value="base" className="pl-10">
+              Base
+            </option>
             <option value="set2">Set 2</option>
             <option value="trap">Trap</option>
           </select>
@@ -210,14 +248,29 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
           <input
             type="range"
             min={0}
-            max={100}
-            step={1}
+            max={1}
+            step={0.01}
             onChange={volSet}
-            className={styles.slider}
+            className={`accent-purple-500 icon-purple h-[2px] ${styles.slider}`}
             name="volSlide"
             id="volSlide"
           />
         </div>
+
+        <button className={`${styles.playButton}`} onClick={stopClick}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="icon-red w-10 h-10 inline"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.5 7.5a3 3 0 013-3h9a3 3 0 013 3v9a3 3 0 01-3 3h-9a3 3 0 01-3-3v-9z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import styles from "./Bonk.module.scss";
 import * as Tone from "tone";
+import useForceUpdate from "use-force-update";
 
 const note = "C1";
 
-
-presetFactor: 0;
+declare global {
+  var presetFactor: number;
+}
 
 type Props = {
   samples: { samp_url: string; samp_name: string }[];
@@ -19,30 +22,32 @@ type Tracks = {
 };
 
 export default function Bonk({ samples, noOfSteps = 16 }: Props) {
+  var presetFact = globalThis.presetFactor;
+  presetFact = 0;
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const trackId = [...Array(samples.length / 2).keys()] as const;
+  const trackId = [...Array(samples.length/3).keys()] as const;
   const stepId = [...Array(noOfSteps).keys()] as const;
 
   const trackRef = React.useRef<Tracks[]>([]);
   const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
   const sequenceRef = React.useRef<Tone.Sequence | null>(null);
   const ledRef = React.useRef<HTMLInputElement[]>([]);
+  const presetRef = React.useRef<HTMLSelectElement>();
 
   const playClick = async () => {
     if (Tone.Transport.state === "started") {
-      Tone.Transport.stop();
+      Tone.Transport.pause();
       setIsPlaying(false);
     } else {
       await Tone.start();
       Tone.Transport.start();
       setIsPlaying(true);
-      
     }
   };
 
-  const stopClick =async () => {
-      Tone.Transport.stop();
-      setIsPlaying(false);
+  const stopClick = async () => {
+    Tone.Transport.stop();
+    setIsPlaying(false);
   };
 
   const bpmSet = (val: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,13 +59,36 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
   };
 
   const presetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value == "set2") {
+    if (e.target.value == "base") {
+      presetFact = 0;
+      console.log("base selected");
     }
+    if (e.target.value == "set2") {
+      presetFact = 5;
+    }
+
+    if (e.target.value == "trap") {
+      presetFact = 10;
+    }
+
+    trackRef.current = samples.map((sample, i) => ({
+      id: i - presetFact,
+      sampler: new Tone.Sampler({
+        urls: {
+          [note]: sample.samp_url,
+        },
+      }).toDestination(),
+    }));
+
+
   };
 
+  //   console.log(window.presetFactor.toString());
+
   React.useEffect(() => {
+    console.log(presetFact);
     trackRef.current = samples.map((sample, i) => ({
-      id: i, //figure out how to change this value
+      id: i - presetFact,
       sampler: new Tone.Sampler({
         urls: {
           [note]: sample.samp_url,
@@ -76,7 +104,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
           }
           ledRef.current[step].checked = true;
         });
-        console.log(step);
+        // console.log(step);
       },
       [...stepId],
       "16n"
@@ -172,13 +200,12 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
           >
             <option value="base">Base</option>
             <option value="set2">Set 2</option>
+            <option value="trap">Trap</option>
           </select>
         </div>
 
         <div className={styles.controlCol}>
-          <label htmlFor="volSlide">
-            Volume
-          </label>
+          <label htmlFor="volSlide">Volume</label>
           <br />
           <input
             type="range"

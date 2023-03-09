@@ -50,7 +50,8 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
 
   const bpmSet = (val: React.ChangeEvent<HTMLInputElement>) => {
     Tone.Transport.bpm.value = Number(val.target.value);
-    document.getElementById("bpmDisp")!.innerHTML = ("BPM  :   " + Tone.Transport.bpm.value.toFixed(0).toString()) ;
+    document.getElementById("bpmDisp")!.innerHTML =
+      "BPM  :   " + Tone.Transport.bpm.value.toFixed(0).toString();
   };
 
   const volSet = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,45 +135,54 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             </label>
           ))}
         </div>
-        <div className={styles.cellStrip}>
-          {trackId.map((trackId) => (
-            <div key={trackId} className={styles.row}>
-              {stepId.map((stepId) => {
-                const id = trackId + "-" + stepId;
-                return (
-                  <label key={id} className={styles.cell}>
-                    <input
-                      type="checkbox"
-                      id={id}
-                      className={`peer ${styles.cellInput}`}
-                      ref={(element) => {
-                        if (!element) return;
-                        if (!stepRef.current[trackId]) {
-                          stepRef.current[trackId] = [];
-                        }
-                        stepRef.current[trackId][stepId] = element;
-                      }}
-                    />
-                    <div
-                      className={`${
-                        trackId == 0
-                          ? "shadow-cyan-400 shadow-3xl bg-cyan-200/50 peer-checked:bg-cyan-400"
-                          : trackId == 1
-                          ? "shadow-fuchsia-400 shadow-3xl bg-fuchsia peer-checked:bg-fuchsia-400"
-                          : trackId == 2
-                          ? "shadow-orange-500 shadow-3xl bg-orange-200 peer-checked:bg-orange-400"
-                          : trackId == 3
-                          ? "shadow-yellow-500 shadow-3xl bg-yellow-200 peer-checked:bg-yellow-400"
-                          : "shadow-lime-500 shadow-3xl bg-lime-200 peer-checked:bg-lime-400"
-                      } peer-checked:opacity-100 opacity-25 ${
-                        styles.cellContent
-                      }`}
-                    ></div>
-                  </label>
-                );
-              })}
-            </div>
-          ))}
+
+        <div className={styles.row}>
+          <div className={styles.sampLabels}>
+            {samples.slice(0, 5).map((sample) => (
+              <div>{sample.samp_name}</div>
+            ))}
+          </div>
+
+          <div className={styles.cellStrip}>
+            {trackId.map((trackId) => (
+              <div key={trackId} className={styles.row}>
+                {stepId.map((stepId) => {
+                  const id = trackId + "-" + stepId;
+                  return (
+                    <label key={id} className={styles.cell}>
+                      <input
+                        type="checkbox"
+                        id={id}
+                        className={`peer ${styles.cellInput}`}
+                        ref={(element) => {
+                          if (!element) return;
+                          if (!stepRef.current[trackId]) {
+                            stepRef.current[trackId] = [];
+                          }
+                          stepRef.current[trackId][stepId] = element;
+                        }}
+                      />
+                      <div
+                        className={`${
+                          trackId == 0
+                            ? "shadow-cyan-400 shadow-3xl bg-cyan-200/50 peer-checked:bg-cyan-400"
+                            : trackId == 1
+                            ? "shadow-fuchsia-400 shadow-3xl bg-fuchsia peer-checked:bg-fuchsia-400"
+                            : trackId == 2
+                            ? "shadow-orange-500 shadow-3xl bg-orange-200 peer-checked:bg-orange-400"
+                            : trackId == 3
+                            ? "shadow-yellow-500 shadow-3xl bg-yellow-200 peer-checked:bg-yellow-400"
+                            : "shadow-lime-500 shadow-3xl bg-lime-200 peer-checked:bg-lime-400"
+                        } peer-checked:opacity-100 opacity-25 ${
+                          styles.cellContent
+                        }`}
+                      ></div>
+                    </label>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -209,7 +219,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
         </button>
 
         <div className={styles.controlCol}>
-          <label htmlFor="bpmSlide" className="bpmDisp" id="bpmDisp" >
+          <label htmlFor="bpmSlide" className="bpmDisp" id="bpmDisp">
             {"BPM" + "  :  " + Tone.Transport.bpm.value.toFixed(0)}
           </label>
           <br />

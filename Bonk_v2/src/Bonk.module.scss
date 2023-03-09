@@ -123,3 +123,18 @@
 .slider {
   caption-side: top;
 }
+
+
+.sampLabels {
+  place-self: start;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  color: #ccc;
+
+  & > * {
+    height: 40px;
+    display: grid;
+    place-content: center;
+  }
+}

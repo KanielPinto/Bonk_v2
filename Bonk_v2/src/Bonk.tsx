@@ -220,6 +220,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             step={1}
             onChange={bpmSet}
             defaultValue={120}
+
             className={`accent-amber-500 icon-amber h-[2px] ${styles.slider}`}
             name="bpmSlide"
             id="bpmSlide"

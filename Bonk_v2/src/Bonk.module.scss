@@ -26,6 +26,7 @@
 .row {
   display: flex;
   column-gap: 9px;
+  justify-content: center;
 
   & > *:nth-child(4n):not(:last-child) {
     margin-right: 9px;

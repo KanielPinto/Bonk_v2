@@ -78,6 +78,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
     if (e.target.value == "oldschool") {
       presetFact = 20;
     }
+    
 
     if (e.target.value == "dance") {
       presetFact = 25;

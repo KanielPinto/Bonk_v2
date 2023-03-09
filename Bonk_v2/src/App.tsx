@@ -97,94 +97,94 @@ function App() {
             samp_name: "CL2",
           },
 
-          //Distort Samples
+          //Smooth Samples
 
           {
-            samp_url: "presets/distort/distort_ophat.wav",
+            samp_url: "presets/smooth/smooth_ophat.wav",
 
             samp_name: "OH3",
           },
 
           {
-            samp_url: "presets/distort/distort_clhat.wav",
+            samp_url: "presets/smooth/smooth_clhat.wav",
 
             samp_name: "CH3",
           },
           {
-            samp_url: "presets/distort/distort_kick.wav",
+            samp_url: "presets/smooth/smooth_kick.wav",
 
             samp_name: "KD3",
           },
 
           {
-            samp_url: "presets/distort/distort_snr.wav",
+            samp_url: "presets/smooth/smooth_snr.wav",
 
             samp_name: "SD3",
           },
           {
-            samp_url: "presets/distort/distort_clap.wav",
+            samp_url: "presets/smooth/smooth_clap.wav",
 
             samp_name: "CL3",
           },
 
 
-          //Distort Samples
+          //Old School Samples
 
           {
-            samp_url: "presets/distort/distort_ophat.wav",
+            samp_url: "presets/oldschool/oldschool_ophat.wav",
 
             samp_name: "OH4",
           },
 
           {
-            samp_url: "presets/distort/distort_clhat.wav",
+            samp_url: "presets/oldschool/oldschool_clhat.wav",
 
             samp_name: "CH4",
           },
           {
-            samp_url: "presets/distort/distort_kick.wav",
+            samp_url: "presets/oldschool/oldschool_kick.wav",
 
             samp_name: "KD4",
           },
 
           {
-            samp_url: "presets/distort/distort_snr.wav",
+            samp_url: "presets/oldschool/oldschool_snr.wav",
 
             samp_name: "SD4",
           },
           {
-            samp_url: "presets/distort/distort_clap.wav",
+            samp_url: "presets/oldschool/oldschool_clap.wav",
 
             samp_name: "CL4",
           },
 
 
-          //Distort Samples
+          //Dance Samples
 
           {
-            samp_url: "presets/distort/distort_ophat.wav",
+            samp_url: "presets/dance/dance_ophat.wav",
 
             samp_name: "OH5",
           },
 
           {
-            samp_url: "presets/distort/distort_clhat.wav",
+            samp_url: "presets/dance/dance_clhat.wav",
 
             samp_name: "CH5",
           },
           {
-            samp_url: "presets/distort/distort_kick.wav",
+            samp_url: "presets/dance/dance_kick.wav",
 
             samp_name: "KD5",
           },
 
           {
-            samp_url: "presets/distort/distort_snr.wav",
+            samp_url: "presets/dance/dance_snr.wav",
 
             samp_name: "SD5",
           },
           {
-            samp_url: "presets/distort/distort_clap.wav",
+            samp_url: "presets/dance/dance_clap.wav",
 
             samp_name: "CL5",
           },

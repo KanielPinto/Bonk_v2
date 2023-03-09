@@ -23,7 +23,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
   var presetFact = globalThis.presetFactor;
   presetFact = 0;
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const trackId = [...Array(samples.length / 3).keys()] as const;
+  const trackId = [...Array(samples.length / 6).keys()] as const;
   const stepId = [...Array(noOfSteps).keys()] as const;
 
   const trackRef = React.useRef<Tracks[]>([]);
@@ -219,7 +219,8 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             max={280}
             step={1}
             onChange={bpmSet}
-            defaultValue = {120}
+            defaultValue={120}
+
             className={`accent-amber-500 icon-amber h-[2px] ${styles.slider}`}
             name="bpmSlide"
             id="bpmSlide"

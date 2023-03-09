@@ -77,7 +77,9 @@
     @include invisibleInput();
 
     &:checked + #{$led}Content{
-        background-color: coral;
+        background-color: rgb(233, 78, 39);
+        opacity: 0.69;
+        filter: drop-shadow(0px 0px 3px rgba(248, 85, 45, 0.8));
     }
   }
 
@@ -86,6 +88,7 @@
     height: 12px;
     border-radius: 999px;
     background-color: #ccc;
+    opacity: 0.1;
     margin: 0 9px;
   }
 }
@@ -127,6 +130,8 @@
 
 .sampLabels {
   place-self: start;
+  font-family: 'Digital-7', arial;
+  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   row-gap: 8px;

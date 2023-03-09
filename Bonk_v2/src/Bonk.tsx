@@ -115,8 +115,15 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
   }, [samples, noOfSteps]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.grid}>
+    <div className={`${styles.container}`}>
+      <div className="flex flex-row">
+        <div className={`mr-3 mt-5 ${styles.sampLabels}`}>
+          {samples.slice(0, 5).map((sample) => (
+            <div>{sample.samp_name}</div>
+          ))}
+        </div>
+        <div>
+        <div className={styles.grid}>
         <div className={styles.row}>
           {stepId.map((stepId) => (
             <label className={styles.led}>
@@ -135,53 +142,55 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             </label>
           ))}
         </div>
+        
+        <div>
+          <div className={styles.row}>
+            {/* <div className={styles.sampLabels}>
+              {samples.slice(0, 5).map((sample) => (
+                <div>{sample.samp_name}</div>
+              ))}
+            </div> */}
 
-        <div className={styles.row}>
-          <div className={styles.sampLabels}>
-            {samples.slice(0, 5).map((sample) => (
-              <div>{sample.samp_name}</div>
-            ))}
-          </div>
-
-          <div className={styles.cellStrip}>
-            {trackId.map((trackId) => (
-              <div key={trackId} className={styles.row}>
-                {stepId.map((stepId) => {
-                  const id = trackId + "-" + stepId;
-                  return (
-                    <label key={id} className={styles.cell}>
-                      <input
-                        type="checkbox"
-                        id={id}
-                        className={`peer ${styles.cellInput}`}
-                        ref={(element) => {
-                          if (!element) return;
-                          if (!stepRef.current[trackId]) {
-                            stepRef.current[trackId] = [];
-                          }
-                          stepRef.current[trackId][stepId] = element;
-                        }}
-                      />
-                      <div
-                        className={`${
-                          trackId == 0
-                            ? "shadow-cyan-400 shadow-3xl bg-cyan-200/50 peer-checked:bg-cyan-400"
-                            : trackId == 1
-                            ? "shadow-fuchsia-400 shadow-3xl bg-fuchsia peer-checked:bg-fuchsia-400"
-                            : trackId == 2
-                            ? "shadow-orange-500 shadow-3xl bg-orange-200 peer-checked:bg-orange-400"
-                            : trackId == 3
-                            ? "shadow-yellow-500 shadow-3xl bg-yellow-200 peer-checked:bg-yellow-400"
-                            : "shadow-lime-500 shadow-3xl bg-lime-200 peer-checked:bg-lime-400"
-                        } peer-checked:opacity-100 opacity-25 ${
-                          styles.cellContent
-                        }`}
-                      ></div>
-                    </label>
-                  );
-                })}
-              </div>
-            ))}
+            <div className={styles.cellStrip}>
+              {trackId.map((trackId) => (
+                <div key={trackId} className={styles.row}>
+                  {stepId.map((stepId) => {
+                    const id = trackId + "-" + stepId;
+                    return (
+                      <label key={id} className={styles.cell}>
+                        <input
+                          type="checkbox"
+                          id={id}
+                          className={`peer ${styles.cellInput}`}
+                          ref={(element) => {
+                            if (!element) return;
+                            if (!stepRef.current[trackId]) {
+                              stepRef.current[trackId] = [];
+                            }
+                            stepRef.current[trackId][stepId] = element;
+                          }}
+                        />
+                        <div
+                          className={`${
+                            trackId == 0
+                              ? "shadow-cyan-400 shadow-3xl bg-cyan-200/50 peer-checked:bg-cyan-400"
+                              : trackId == 1
+                              ? "shadow-fuchsia-400 shadow-3xl bg-fuchsia peer-checked:bg-fuchsia-400"
+                              : trackId == 2
+                              ? "shadow-orange-500 shadow-3xl bg-orange-200 peer-checked:bg-orange-400"
+                              : trackId == 3
+                              ? "shadow-yellow-500 shadow-3xl bg-yellow-200 peer-checked:bg-yellow-400"
+                              : "shadow-lime-500 shadow-3xl bg-lime-200 peer-checked:bg-lime-400"
+                          } peer-checked:opacity-100 opacity-25 ${
+                            styles.cellContent
+                          }`}
+                        ></div>
+                      </label>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -286,6 +295,9 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
           </svg>
         </button>
       </div>
+        </div>
+      </div>
+      
     </div>
   );
 }

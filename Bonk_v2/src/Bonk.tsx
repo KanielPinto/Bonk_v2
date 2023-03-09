@@ -145,7 +145,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
   return (
     <div className={`${styles.container}`}>
       <div className="flex flex-row">
-        <div className={`mr-4 mt-6 ${styles.sampLabels}`}>
+        <div className={`mt-6 ${styles.sampLabels}`}>
           {samples.slice(0, 5).map((sample) => (
             <div>{sample.samp_name}</div>
           ))}
@@ -282,7 +282,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             id="presetSel"
             defaultValue={"base"}
             onChange={presetChange}
-            className="bg-transparent pr-1 rounded-md mt-1 text-center pr-3"
+            className="bg-transparent pr-1 rounded-md mt-1 text-center"
           >
             <option value="base" className="bg-black text-start">
               Base

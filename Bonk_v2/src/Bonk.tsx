@@ -63,14 +63,14 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
       presetFact = 0;
       console.log("base selected");
     }
-    if (e.target.value == "set2") {
+    if (e.target.value == "acoustic") {
       presetFact = 5;
     }
 
     if (e.target.value == "distort") {
       presetFact = 10;
     }
-    
+
 
     if (e.target.value == "smooth") {
       presetFact = 15;

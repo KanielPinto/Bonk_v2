@@ -3,7 +3,7 @@ import "./index.css";
 
 function App() {
   return (
-    <div className="flex flex-col justify-items-between align-items-center w-[100%]">
+    <div className="flex flex-col justify-items-between align-items-center w-[100%] scale-[1.15]">
       <h1 className="text-7xl font-bold mb-5 text-center font-orbitron tracking-widest text-white">
         Bonk v2
       </h1>

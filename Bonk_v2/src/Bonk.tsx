@@ -117,31 +117,31 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
   return (
     <div className={`${styles.container}`}>
       <div className="flex flex-row">
-        <div className={`mr-3 mt-5 ${styles.sampLabels}`}>
+        <div className={`mr-4 mt-6 ${styles.sampLabels}`}>
           {samples.slice(0, 5).map((sample) => (
             <div>{sample.samp_name}</div>
           ))}
         </div>
         <div>
         <div className={styles.grid}>
-        <div className={styles.row}>
-          {stepId.map((stepId) => (
-            <label className={styles.led}>
-              <input
-                className={styles.ledInput}
-                type="radio"
-                name="led"
-                id={"led" + "-" + stepId}
-                disabled
-                ref={(element) => {
-                  if (!element) return;
-                  ledRef.current[stepId] = element;
-                }}
-              />
-              <div className={styles.ledContent}></div>
-            </label>
-          ))}
-        </div>
+          <div className={`pb-1 ${styles.row}`}>
+            {stepId.map((stepId) => (
+              <label className={styles.led}>
+                <input
+                  className={styles.ledInput}
+                  type="radio"
+                  name="led"
+                  id={"led" + "-" + stepId}
+                  disabled
+                  ref={(element) => {
+                    if (!element) return;
+                    ledRef.current[stepId] = element;
+                  }}
+                />
+                <div className={styles.ledContent}></div>
+              </label>
+            ))}
+          </div>
         
         <div>
           <div className={styles.row}>
@@ -196,7 +196,7 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
       </div>
 
       {/*Control Panel*/}
-      <div className={`w-50 flex flex-row space-x-10 mt-2`}>
+      <div className={`w-50 flex flex-row space-x-10 mt-4 cp-font`}>
         <button className={styles.playButton} onClick={playClick}>
           {isPlaying ? (
             <svg
@@ -254,13 +254,13 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             id="presetSel"
             defaultValue={"base"}
             onChange={presetChange}
-            className="bg-black border-2 rounded-md mt-1 border-white text-center"
+            className="bg-transparent pr-1 rounded-md mt-1 text-center pr-3"
           >
-            <option value="base" className="pl-10">
+            <option value="base" className="bg-black text-start">
               Base
             </option>
-            <option value="set2">Set 2</option>
-            <option value="trap">Trap</option>
+            <option value="set2" className="bg-black text-start">Set 2</option>
+            <option value="trap" className="bg-black text-start">Trap</option>
           </select>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Bonk.module.scss";
 import * as Tone from "tone";
 
@@ -67,8 +67,20 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
       presetFact = 5;
     }
 
-    if (e.target.value == "trap") {
+    if (e.target.value == "distort") {
       presetFact = 10;
+    }
+
+    if (e.target.value == "smooth") {
+      presetFact = 15;
+    }
+
+    if (e.target.value == "oldschool") {
+      presetFact = 20;
+    }
+
+    if (e.target.value == "dance") {
+      presetFact = 25;
     }
 
     trackRef.current = samples.map((sample, i) => ({
@@ -80,6 +92,20 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
       }).toDestination(),
     }));
   };
+
+  React.useEffect(()=>{
+    document.addEventListener('keydown', detectKeyDown, true);
+  }, [])
+
+  const detectKeyDown = (e: { key: any; }) => {
+    console.log(e.key);
+    if(e.key==="Enter"){
+      playClick();
+    }
+    if(e.key==="s"){
+      stopClick();
+    }
+  }
 
   //   console.log(window.presetFactor.toString());
 
@@ -259,8 +285,12 @@ export default function Bonk({ samples, noOfSteps = 16 }: Props) {
             <option value="base" className="bg-black text-start">
               Base
             </option>
-            <option value="set2" className="bg-black text-start">Set 2</option>
-            <option value="trap" className="bg-black text-start">Trap</option>
+            <option value="acoustic" className="bg-black text-start">Acoustic</option>
+            <option value="distort" className="bg-black text-start">Distort</option>
+            <option value="smooth" className="bg-black text-start">Smooth</option>
+            <option value="oldschool" className="bg-black text-start">Old School</option>
+            <option value="dance" className="bg-black text-start">Dance</option>
+
           </select>
         </div>
 

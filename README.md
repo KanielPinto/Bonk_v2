@@ -1,7 +1,7 @@
 # Bonk_v2
 
 
-##A drum machine built with React, TypeScript and Tone.js.
+## A drum machine built with React, TypeScript and Tone.js.
 
 Features include an interactive and responsive UI, BPM and Volume controls and a selection of 6 curated drum kit presets.
 

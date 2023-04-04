@@ -1,9 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-@import url('https://allfont.net/allfont.css?fonts=digital-7');
-@import url('https://fonts.googleapis.com/css2?family=Iceland&display=swap');
-@import url('https://db.onlinewebfonts.com/c/86203afc717c0d2960e0b34fd4041e95?family=Ticking+Timebomb+BB');
-                
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
+@import url("https://allfont.net/allfont.css?fonts=digital-7");
+@import url("https://fonts.googleapis.com/css2?family=Iceland&display=swap");
+
+@font-face {
+  font-family: "Ticking Timebomb BB";
+  src: url("https://db.onlinewebfonts.com/t/86203afc717c0d2960e0b34fd4041e95.eot");
+  src: url("https://db.onlinewebfonts.com/t/86203afc717c0d2960e0b34fd4041e95.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/86203afc717c0d2960e0b34fd4041e95.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/86203afc717c0d2960e0b34fd4041e95.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/86203afc717c0d2960e0b34fd4041e95.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/86203afc717c0d2960e0b34fd4041e95.svg#Ticking Timebomb BB")
+      format("svg");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +28,7 @@
   font-weight: 400;
 }
 
-body{
+body {
   display: grid;
   place-content: center;
   min-height: 100vh;
@@ -50,6 +64,6 @@ body{
 }
 
 .cp-font {
-  font-family: 'Iceland', cursive;
+  font-family: "Iceland", cursive;
   font-size: 1.4rem;
 }
